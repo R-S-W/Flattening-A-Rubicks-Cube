@@ -4,7 +4,7 @@ import numpy as np
 diagramNumber = 1
 #1 = Clover, 2 = 2-Pair, 3 = Tri-Pair
 def zeroF(t): return 0
-def pCircle(dir,alpha):
+def pCircle(dir,alpha, isClockwise = True):
 	dir = list(dir)
 	# resArr = np.array([None,None,None])
 	if dir == list(RIGHT):
@@ -20,7 +20,8 @@ def pCircle(dir,alpha):
 	elif dir == list(IN):
 		resArr = np.array([np.cos,np.sin,zeroF])
 	else: return
-	return lambda t : np.array([resArr[0](t+alpha),resArr[1](t+alpha),resArr[2](t+alpha)])
+	mult = 1 if isClockwise else -1
+	return lambda t : np.array([resArr[0](mult*t+alpha),resArr[1](mult*t+alpha),resArr[2](mult*t+alpha)])
 
 # circ1 = ParametricCurve(pCircle(OUT,PI/4), t_range =[0,TAU-.2])
 
@@ -44,7 +45,15 @@ else: aColors = colorArrB2
 
 
 
-farrA = [Circle(color=x) for x in aColors]
+# farrA = [Circle(color=x) for x in aColors]
+farrA = [None]*6
+farrA[0] = Circle(color=aColors[0])
+farrA[1] = Circle(color=aColors[1])
+farrA[2] = ParametricCurve(pCircle(DOWN, -PI/2), t_range=[0, TAU-.1], color = aColors[2])
+farrA[3] = ParametricCurve(pCircle(DOWN, -PI/2), t_range=[0, TAU-.1], color = aColors[3])
+farrA[4] = ParametricCurve(pCircle(RIGHT, -PI/2), t_range=[0, TAU-.1],color = aColors[4])
+farrA[5] = ParametricCurve(pCircle(RIGHT, -PI/2), t_range=[0, TAU-.1],color = aColors[5])
+
 for x in farrA:
 		x.scale(np.sin(alpha))
 
@@ -52,12 +61,12 @@ for x in farrA:
 	circles 3 and 4 perp. to y, and circles 5 and 6 perp. to x.'''
 farrA[0].shift((0, 0, ca))
 farrA[1].shift((0, 0, -ca))
-farrA[2].rotate(90*DEGREES, axis=RIGHT)
+# farrA[2].rotate(90*DEGREES, axis=RIGHT)
 farrA[2].shift((0, ca, 0))
-farrA[3].rotate(90*DEGREES, axis=RIGHT)
+# farrA[3].rotate(90*DEGREES, axis=RIGHT)
 farrA[3].shift((0, -ca, 0))
-farrA[4].rotate(90*DEGREES, axis=UP)
-farrA[5].rotate(90*DEGREES, axis=UP)
+# farrA[4].rotate(90*DEGREES, axis=UP)
+# farrA[5].rotate(90*DEGREES, axis=UP)
 farrA[4].shift((ca, 0, 0))
 farrA[5].shift((-ca, 0, 0))
 
@@ -65,12 +74,17 @@ farrA[5].shift((-ca, 0, 0))
 if diagramNumber ==1:
 	#---Create Clover Schlegel Diagram---
 	farrB = [Circle(color=x) for x in colorArr1]	
+
+
 	farrB[0].scale(.5)
 	farrB[1].scale(1)
 	farrB[4].shift((1.15,0,0))
 	farrB[2].shift((0,1.15,0))
+	farrB[2].rotate(180*DEGREES, axis = LEFT+DOWN) #rotate to correct transformation 
 	farrB[5].shift((-1.15,0,0))
+	farrB[5].rotate(180*DEGREES, axis = UP)#to correct transformation
 	farrB[3].shift((0, -1.15,0))
+	farrB[3].rotate(-90*DEGREES)
 
 elif diagramNumber==2:
 	for x in farrA:  x.rotate_about_origin(45*DEGREES, axis=UP)
@@ -150,10 +164,10 @@ class RubicksSchlegelTransform(Scene):
 		
 		#_____Add Shapes_____
 		self.add(text2d)
-		self.add(circ1)
+		# self.add(circ1)
 
 
-		# for x in farrA: self.add(x)
+		for x in farrA: self.add(x)
 		self.wait(2)
 		self.play(frame.animate.increment_theta(-55*DEGREES),run_time = 2	)
 		self.play(frame.animate.increment_phi(-25*DEGREES),run_time = 2	)
