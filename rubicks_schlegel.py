@@ -1,7 +1,8 @@
 from manimlib import *
 import numpy as np
 
-diagramNumber = 3
+diagramNumber = 2
+cameraSettingNumber = 2
 #1 = Clover, 2 = 2-Pair, 3 = Tri-Pair
 
 #_____Entity Constants and Parameters_____
@@ -52,6 +53,7 @@ if diagramNumber ==1:
 	farrB[5].rotate(180*DEGREES, axis = UP)#to correct transformation
 	farrB[3].shift((0, -1.15,0))
 	farrB[3].rotate(-90*DEGREES)
+
 
 elif diagramNumber==2:
 	#---Create 2-Pair Schlegel Diagram---
@@ -124,10 +126,11 @@ class RubicksSchlegelTransform(Scene):
 		axes = ThreeDAxes()#**axis_config)
 		self.add(axes) 
 		frame = self.camera.frame
-		frame.set_euler_angles(
-				theta=30 * DEGREES,
-				phi=75 * DEGREES,
-		)
+		if cameraSettingNumber == 1 or cameraSettingNumber==2:
+			frame.set_euler_angles(
+					theta=30 * DEGREES,
+					phi=75 * DEGREES,
+			)		
 
 		#_____Create Entities_____
 		text2d = Text("Hello")
@@ -137,12 +140,19 @@ class RubicksSchlegelTransform(Scene):
 		
 		#_____Add Shapes_____
 		self.add(text2d)
-
 		for x in farrA: self.add(x)
+		
+		#_____Animate_____
 		self.wait(2)
-		self.play(frame.animate.increment_theta(-55*DEGREES),run_time = 2	)
-		self.play(frame.animate.increment_phi(-25*DEGREES),run_time = 2	)
-		self.wait(1)
+		if cameraSettingNumber == 1:
+			self.play(frame.animate.increment_theta(-55*DEGREES),run_time = 2	)
+			self.play(frame.animate.increment_phi(-25*DEGREES),run_time = 2	)
+			self.wait(1)
+		if cameraSettingNumber == 2:
+			self.play(frame.animate.increment_theta(-55*DEGREES), run_time=2	)
+			self.play(frame.animate.increment_phi(-50*DEGREES), run_time=2	)
+			self.wait(1)
+
 		self.play(*a_to_b, run_time = 4)
 		self.wait(4)
 
