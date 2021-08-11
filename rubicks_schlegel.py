@@ -1,8 +1,29 @@
 from manimlib import *
 import numpy as np
 
-diagramNumber = 3
+diagramNumber = 1
 #1 = Clover, 2 = 2-Pair, 3 = Tri-Pair
+def zeroF(t): return 0
+def pCircle(dir,alpha):
+	dir = list(dir)
+	# resArr = np.array([None,None,None])
+	if dir == list(RIGHT):
+		resArr = np.array([zeroF,np.cos,np.sin])
+	elif dir == list(UP):
+		resArr = np.array([lambda t:-np.cos(t),zeroF,np.sin])
+	elif dir == list(LEFT):
+		resArr = np.array([zeroF, lambda t: -np.cos(t),np.sin])
+	elif dir == list(DOWN):
+		resArr = np.array([np.cos, zeroF, np.sin])
+	elif dir == list(OUT):
+		resArr = np.array([np.cos,np.sin,zeroF])
+	elif dir == list(IN):
+		resArr = np.array([np.cos,np.sin,zeroF])
+	else: return
+	return lambda t : np.array([resArr[0](t+alpha),resArr[1](t+alpha),resArr[2](t+alpha)])
+
+# circ1 = ParametricCurve(pCircle(OUT,PI/4), t_range =[0,TAU-.2])
+
 
 #_____Entity Constants and Parameters_____
 alpha = 5/6*PI/2
@@ -129,8 +150,10 @@ class RubicksSchlegelTransform(Scene):
 		
 		#_____Add Shapes_____
 		self.add(text2d)
+		self.add(circ1)
 
-		for x in farrA: self.add(x)
+
+		# for x in farrA: self.add(x)
 		self.wait(2)
 		self.play(frame.animate.increment_theta(-55*DEGREES),run_time = 2	)
 		self.play(frame.animate.increment_phi(-25*DEGREES),run_time = 2	)
@@ -160,10 +183,7 @@ class RubicksSchlegelTransform(Scene):
 		#text3d = TextMobject('Yo').scale(2)
 		#text3d.rotate(PI/2,axis=RIGHT)
 
-	# def func1(t):
-	# 	return np.array([np.sin(t), np.cos(t), 1])
 
-	# circ1 = ParametricCurve(func1, t_range =[0,TAU])
 	# circ2 = Circle(color= RED)
 	# circ2.move_to(axes.c2p(1,2))
 	# circ3 = Circle(color=BLUE)
