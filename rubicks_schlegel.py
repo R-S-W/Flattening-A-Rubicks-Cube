@@ -1,7 +1,7 @@
 from manimlib import *
 import numpy as np
 
-diagramNumber = 1
+diagramNumber = 2
 #1 = Clover, 2 = 2-Pair, 3 = Tri-Pair
 def zeroF(t): return 0
 def pCircle(dir,alpha, isClockwise = True):
@@ -88,18 +88,27 @@ if diagramNumber ==1:
 
 elif diagramNumber==2:
 	for x in farrA:  x.rotate_about_origin(45*DEGREES, axis=UP)
+	farrA[2].rotate(45*DEGREES,axis = DOWN)
+	farrA[3].rotate(45*DEGREES,axis = DOWN)
+
+	farrA[4].rotate(180*DEGREES, axis = DOWN)
+	farrA[5].rotate(180*DEGREES, axis = DOWN)
 
 	#---Create 2-Pair Schlegel Diagram---
 	farrB = [Circle(color = x) for x in colorArrB2]
 	
+	farrB[0].shift([-.6,0,0])
+	farrB[0].scale(.75)
+	farrB[1].shift([-.6,0,0])
 	farrB[2].shift([0,1.15,0])
+	farrB[2].rotate(180*DEGREES, axis = RIGHT+UP)
 	farrB[3].shift([0,-1.15,0])
+	farrB[3].rotate(-90*DEGREES)
 	farrB[4].shift([.6,0,0])
+	# farrB[4].rotate(180*DEGREES)
 	farrB[5].shift([.6,0,0])
 	farrB[5].scale(.75)
-	farrB[0].shift([-.6,0,0])
-	farrB[1].shift([-.6,0,0])
-	farrB[0].scale(.75)
+	# farrB[5].rotate(180*DEGREES)
 
 
 else:
