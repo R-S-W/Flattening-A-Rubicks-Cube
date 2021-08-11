@@ -120,25 +120,26 @@ else:
 	farrB = [Circle(color =x) for x in colorArrB2]
 	smR = 2/3.
 	l = .7*2/3
-	farrB[2].shift((0,-l,0))
-	farrB[2].scale(smR)
-	farrB[2].rotate(-90*DEGREES)
 	farrB[3].shift((0,-l,0))
+	farrB[3].scale(smR)
 	farrB[3].rotate(-90*DEGREES)
+	farrB[2].shift((0,-l,0))
+	farrB[2].rotate(-90*DEGREES)
 	farrB[0].shift((l,0,0))
 	farrB[0].rotate_about_origin(30*DEGREES)
 	farrB[0].scale(smR)
 	farrB[1].shift((l,0,0))
 	farrB[1].rotate_about_origin(30*DEGREES)
-	farrB[4].shift((-l,0,0))
-	farrB[4].rotate_about_origin(-30*DEGREES)
-	farrB[4].scale(smR)
-	farrB[4].rotate(180*DEGREES, axis = RIGHT)
-	farrB[4].rotate(150*DEGREES)
 	farrB[5].shift((-l,0,0))
 	farrB[5].rotate_about_origin(-30*DEGREES)
+	farrB[5].scale(smR)
 	farrB[5].rotate(180*DEGREES, axis = RIGHT)
 	farrB[5].rotate(150*DEGREES)
+	
+	farrB[4].shift((-l,0,0))
+	farrB[4].rotate_about_origin(-30*DEGREES)
+	farrB[4].rotate(180*DEGREES, axis = RIGHT)
+	farrB[4].rotate(150*DEGREES)
 	
 
 
