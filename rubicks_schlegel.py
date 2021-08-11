@@ -1,7 +1,7 @@
 from manimlib import *
 import numpy as np
 
-diagramNumber = 2
+diagramNumber = 3
 #1 = Clover, 2 = 2-Pair, 3 = Tri-Pair
 def zeroF(t): return 0
 def pCircle(dir,alpha, isClockwise = True):
@@ -90,13 +90,11 @@ elif diagramNumber==2:
 	for x in farrA:  x.rotate_about_origin(45*DEGREES, axis=UP)
 	farrA[2].rotate(45*DEGREES,axis = DOWN)
 	farrA[3].rotate(45*DEGREES,axis = DOWN)
-
 	farrA[4].rotate(180*DEGREES, axis = DOWN)
 	farrA[5].rotate(180*DEGREES, axis = DOWN)
 
 	#---Create 2-Pair Schlegel Diagram---
 	farrB = [Circle(color = x) for x in colorArrB2]
-	
 	farrB[0].shift([-.6,0,0])
 	farrB[0].scale(.75)
 	farrB[1].shift([-.6,0,0])
@@ -105,13 +103,15 @@ elif diagramNumber==2:
 	farrB[3].shift([0,-1.15,0])
 	farrB[3].rotate(-90*DEGREES)
 	farrB[4].shift([.6,0,0])
-	# farrB[4].rotate(180*DEGREES)
 	farrB[5].shift([.6,0,0])
 	farrB[5].scale(.75)
-	# farrB[5].rotate(180*DEGREES)
 
 
 else:
+	farrA[2].rotate(45*DEGREES,axis = DOWN)
+	farrA[3].rotate(45*DEGREES,axis=DOWN)
+	farrA[4].rotate(45*DEGREES,axis = RIGHT)
+	farrA[5].rotate(45*DEGREES, axis=RIGHT)
 	for x in farrA: 
 		x.rotate_about_origin(45*DEGREES, axis=UP)
 		x.rotate_about_origin(-45*DEGREES,axis = RIGHT)
@@ -120,19 +120,25 @@ else:
 	farrB = [Circle(color =x) for x in colorArrB2]
 	smR = 2/3.
 	l = .7*2/3
-	farrB[0].shift((0,-l,0))
-	farrB[0].scale(smR)
-	farrB[1].shift((0,-l,0))
-	farrB[2].shift((-l,0,0))
-	farrB[2].rotate_about_origin(-30*DEGREES)
+	farrB[2].shift((0,-l,0))
 	farrB[2].scale(smR)
-	farrB[3].shift((-l,0,0))
-	farrB[3].rotate_about_origin(-30*DEGREES)
-	farrB[4].shift((l,0,0))
-	farrB[4].rotate_about_origin(30*DEGREES)
+	farrB[2].rotate(-90*DEGREES)
+	farrB[3].shift((0,-l,0))
+	farrB[3].rotate(-90*DEGREES)
+	farrB[0].shift((l,0,0))
+	farrB[0].rotate_about_origin(30*DEGREES)
+	farrB[0].scale(smR)
+	farrB[1].shift((l,0,0))
+	farrB[1].rotate_about_origin(30*DEGREES)
+	farrB[4].shift((-l,0,0))
+	farrB[4].rotate_about_origin(-30*DEGREES)
 	farrB[4].scale(smR)
-	farrB[5].shift((l,0,0))
-	farrB[5].rotate_about_origin(30*DEGREES)
+	farrB[4].rotate(180*DEGREES, axis = RIGHT)
+	farrB[4].rotate(150*DEGREES)
+	farrB[5].shift((-l,0,0))
+	farrB[5].rotate_about_origin(-30*DEGREES)
+	farrB[5].rotate(180*DEGREES, axis = RIGHT)
+	farrB[5].rotate(150*DEGREES)
 	
 
 
