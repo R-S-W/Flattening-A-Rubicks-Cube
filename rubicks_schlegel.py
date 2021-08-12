@@ -1,8 +1,12 @@
 from manimlib import *
 import numpy as np
+import sys
 
-diagramNumber = 2
-cameraSettingNumber = 2
+if len(sys.argv)<4: print('Please add the diagram number')
+
+diagramNumber = int(sys.argv[3])
+cameraSettingNumber = 3
+if len(sys.argv) >4:  cameraSettingNumber = int(sys.argv[4])
 #1 = Clover, 2 = 2-Pair, 3 = Tri-Pair
 
 #_____Entity Constants and Parameters_____
