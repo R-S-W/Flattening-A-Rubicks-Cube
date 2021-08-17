@@ -143,8 +143,8 @@ class RubicksSchlegelTransform(Scene):
 			)		
 
 		#_____Create Entities_____
-		text2d = Text("Hello")
-		text2d.to_edge(UP+RIGHT)
+		# text2d = Text("Hello")
+		# text2d.to_edge(UP+RIGHT)
 		# initSphere = Sphere(color = GREY)
 		# initSphere.scale(.8*np.sin(alpha))
 
